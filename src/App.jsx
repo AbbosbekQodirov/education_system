@@ -1,6 +1,9 @@
+import Home from "./pages/home/Home";
+
 function App() {
   return (
     <div className="App">
+      <Home/>
       <h1>Test Page</h1>
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt quia
