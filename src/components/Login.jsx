@@ -11,7 +11,7 @@ const Login = () => {
   return (
     <div className="w-full h-screen flex justify-center items-center bg-gradient-to-br from-cyan-500 to-blue-500">
       <form
-        action="/Home"
+        action="/home"
         className="w-[500px] max-w-[90%] min-h-[600px] bg-white rounded-xl flex justify-center items-center flex-col gap-5"
       >
         <h1 className="text-3xl font-semibold text-center text-blue-500">
@@ -69,7 +69,7 @@ const Login = () => {
         >
           Parol Yoki ID hato tekshirib ko'ring!
         </p>
-        <Link to={id === "TEST" && password === "test" ? "/Home" : ""}>
+        <Link to={id === "TEST" && password === "test" ? "/home" : ""}>
           <Button
             type="submit"
             variant="contained"
