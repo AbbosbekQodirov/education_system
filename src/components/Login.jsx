@@ -2,7 +2,7 @@ import { Button, TextField } from "@mui/material";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-const Login = () => {
+const Login = ({ setLogin }) => {
   const [errorMessage, setErrorMessage] = useState(true);
   const [errorPassword, setErrorPassword] = useState(true);
   const [id, setId] = useState("");
@@ -80,6 +80,7 @@ const Login = () => {
               if (id === "TEST" && password === "test") {
                 setErrorPassword(true);
                 setErrorMessage(true);
+                setLogin(true)
               } else {
                 if (id === "" && password === "") {
                   setErrorPassword(false);

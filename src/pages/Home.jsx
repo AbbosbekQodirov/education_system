@@ -1,5 +1,6 @@
-import React from "react";
-import Navbar from "./components/Navbar";
+import React from 'react'
+import Navbar from '../components/Navbar';
+
 import { Route, Routes } from "react-router-dom";
 import { BiSearchAlt } from "react-icons/bi";
 import { AiOutlineFullscreen, AiOutlineDollar } from "react-icons/ai";
@@ -9,14 +10,16 @@ import { BsSave } from "react-icons/bs";
 import { TbReportMoney } from "react-icons/tb";
 import { GiTeacher } from "react-icons/gi";
 
-import Menu from "./components/Menu";
-import Lids from "./pages/Lids";
-import Teachers from "./pages/Teachers";
-import Groups from "./pages/Groups";
-import Students from "./pages/Students";
-import Finance from "./pages/Finance";
-import Reports from "./pages/Reports";
-import Settings from "./pages/Settings";
+import Menu from "../components/Menu";
+import Lids from "../pages/Lids";
+import Teachers from "../pages/Teachers";
+import Groups from "../pages/Groups";
+import Students from "../pages/Students";
+import Finance from "../pages/Finance";
+import Reports from "../pages/Reports";
+import Settings from "../pages/Settings";
+import One from './One';
+
 
 function Home() {
   return (
@@ -36,9 +39,8 @@ function Home() {
           }}
         />
         <header className="w-[calc(100%-80px)] min-h-[calc(100vh-80px)] bg-gray-200">
-          <Home />
           <Routes>
-            {/* <Route path="/" element={<Home />} /> */}
+            <Route path="/" element={<One />} />
             <Route path="/lids" element={<Lids />} />
             <Route path="/teachers" element={<Teachers />} />
             <Route path="/groups" element={<Groups />} />
@@ -53,4 +55,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Home
