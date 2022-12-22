@@ -9,6 +9,7 @@ import { FaUserGraduate, FaLayerGroup, FaHome } from "react-icons/fa";
 import { BsSave } from "react-icons/bs";
 import { TbReportMoney } from "react-icons/tb";
 import { GiTeacher } from "react-icons/gi";
+import {ImStatsDots} from "react-icons/im"
 
 import Menu from "../components/Menu";
 import Lids from "../pages/Lids";
@@ -36,6 +37,7 @@ function Home() {
             BsSave,
             TbReportMoney,
             GiTeacher,
+            ImStatsDots,
           }}
         />
         <header className="w-[calc(100%-80px)] min-h-[calc(100vh-80px)] bg-gray-200">

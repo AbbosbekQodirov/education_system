@@ -1,17 +1,17 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const Navbar = ({Icons}) => {
   return (
     <>
-      <nav className="w-full min-h-[80px] shadow-md flex justify-between items-center px-4 relative">
-        <Link
-          className="w-[60px] absolute flex flex-col gap-2 items-center"
+      <nav className="w-full min-h-[80px] shadow-md flex justify-between items-center px-2 relative">
+        <NavLink
+          className="w-[90px] absolute p-2 flex flex-col gap-2 items-center duration-300 rounded-lg hover:bg-gray-500 hover:text-white"
           to={"/home/user"}
         >
           <Icons.FaHome />
           Home
-        </Link>
+        </NavLink>
         <div className="w-[300px] border-[2px] border-black/60 flex justify-between items-center rounded-3xl px-2 overflow-hidden ml-[100px]">
           <input
             placeholder="Qidirish"
@@ -20,7 +20,7 @@ const Navbar = ({Icons}) => {
           <Icons.BiSearchAlt className="text-2xl" />
         </div>
         <div className="brand">
-          <h2 className="text-2xl font-semibold">Web Diaru</h2>
+          <h2 className="text-2xl font-semibold">Web Diary</h2>
         </div>
         <div className="user flex items-center gap-3">
           <div className="cursor-pointer">
