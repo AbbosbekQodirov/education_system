@@ -1,59 +1,60 @@
+import { Box } from "@mui/material";
 import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const Menu = ({ Icons }) => {
   return (
-    <div className="menu flex flex-col justify-around items-center w-[100px] min-h-[calc(100vh-100px)]shadow-2xl">
+    <Box className="menu flex flex-col justify-around items-center w-[110px] min-h-[calc(100vh-100px)]shadow-2xl">
       <NavLink
-        className="w-[90px] p-2 flex flex-col gap-2 items-center duration-300 rounded-lg hover:bg-gray-500 hover:text-white"
-        to={"/lids"}
+        className="w-[100px] p-2 flex flex-col gap-2 items-center duration-300 rounded-lg hover:bg-gray-500 hover:text-white"
+        to={"/doubt"}
       >
-        <Icons.BsSave />
-        <p>Dashboard</p>
+        <Icons.BiCheckDouble />
+        <p>Davomat</p>
       </NavLink>
       <NavLink
-        className="w-[90px] p-2 flex flex-col gap-2 items-center duration-300 rounded-lg hover:bg-gray-500 hover:text-white"
-        to={"/teachers"}
+        className="w-[100px] p-2 flex flex-col gap-2 items-center duration-300 rounded-lg hover:bg-gray-500 hover:text-white"
+        to={"/groups-and-students"}
       >
         <Icons.GiTeacher />
-        <p>O'qituvchilar</p>
+        <p className="text-center">Guruhlar va O'qituvchilar</p>
       </NavLink>
       <NavLink
-        className="w-[90px] p-2 flex flex-col gap-2 items-center duration-300 rounded-lg hover:bg-gray-500 hover:text-white"
-        to={"/groups"}
+        className="w-[100px] p-2 flex flex-col gap-2 items-center duration-300 rounded-lg hover:bg-gray-500 hover:text-white"
+        to={"/teachers"}
       >
         <Icons.FaLayerGroup />
-        <p>Guruhlar</p>
+        <p>Ustozlar</p>
       </NavLink>
       <NavLink
-        className="w-[90px] p-2 flex flex-col gap-2 items-center duration-300 rounded-lg hover:bg-gray-500 hover:text-white"
+        className="w-[100px] p-2 flex flex-col gap-2 items-center duration-300 rounded-lg hover:bg-gray-500 hover:text-white"
         to={"/students"}
       >
         <Icons.FaUserGraduate />
         <p>Talabalar</p>
       </NavLink>
       <NavLink
-        className="w-[90px] p-2 flex flex-col gap-2 items-center duration-300 rounded-lg hover:bg-gray-500 hover:text-white"
+        className="w-[100px] p-2 flex flex-col gap-2 items-center duration-300 rounded-lg hover:bg-gray-500 hover:text-white"
         to={"/finance"}
       >
         <Icons.AiOutlineDollar />
         <p className="text-center">Moliya Hisobot</p>
       </NavLink>
       <NavLink
-        className="w-[90px] p-2 flex flex-col gap-2 items-center duration-300 rounded-lg hover:bg-gray-500 hover:text-white"
+        className="w-[100px] p-2 flex flex-col gap-2 items-center duration-300 rounded-lg hover:bg-gray-500 hover:text-white"
         to={"/reports"}
       >
         <Icons.ImStatsDots />
         <p>Statistika</p>
       </NavLink>
       <NavLink
-        className="w-[90px] p-2 flex flex-col gap-2 items-center duration-300 rounded-lg hover:bg-gray-500 hover:text-white"
+        className="w-[100px] p-2 flex flex-col gap-2 items-center duration-300 rounded-lg hover:bg-gray-500 hover:text-white"
         to={"/settings"}
       >
         <Icons.FiSettings />
         <p>Sozlanmalar</p>
       </NavLink>
-    </div>
+    </Box>
   );
 };
 

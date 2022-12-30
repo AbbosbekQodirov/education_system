@@ -1,10 +1,10 @@
 import { Box } from '@mui/material'
 import React from 'react'
 
-const Groups = () => {
+function User() {
   return (
-    <Box>Groups</Box>
+    <Box>One</Box>
   )
 }
 
-export default Groups
+export default User

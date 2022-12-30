@@ -1,8 +1,9 @@
+import { Box } from '@mui/material'
 import React from 'react'
 
 const Settings = () => {
   return (
-    <div>Settings</div>
+    <Box>Settings</Box>
   )
 }
 

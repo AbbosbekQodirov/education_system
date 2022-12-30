@@ -1,15 +1,17 @@
-import { Button, TextField } from "@mui/material";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { Box, Button, TextField } from "@mui/material";
 import { Link } from "react-router-dom";
+import AuthContext from "../context/AuthContext";
 
 const Login = ({ setLogin }) => {
+  const { loginUser } = useContext(AuthContext);
   const [errorMessage, setErrorMessage] = useState(true);
   const [errorPassword, setErrorPassword] = useState(true);
-  const [id, setId] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [help, setHelp] = useState(true);
   return (
-    <div className="w-full h-screen flex justify-center items-center bg-gradient-to-br from-cyan-500 to-blue-500">
+    <Box className="w-full h-screen flex justify-center items-center bg-gradient-to-br from-cyan-500 to-blue-500">
       <form
         action="/home"
         className="w-[500px] max-w-[90%] min-h-[600px] bg-white rounded-xl flex justify-center items-center flex-col gap-5"
@@ -17,15 +19,15 @@ const Login = ({ setLogin }) => {
         <h1 className="text-3xl font-semibold text-center text-blue-500">
           Web Diary
         </h1>
-        <div className="w-full pl-[5%]">
+        <Box className="w-full pl-[5%]">
           <TextField
             type={"text"}
             id="outlined-basic"
-            label="ID"
+            label="user name"
             className="w-[95%]"
             variant="outlined"
             onChange={(message) => {
-              setId(message.target.value);
+              setUsername(message.target.value);
               message.target.value
                 ? setErrorMessage(true)
                 : setErrorMessage(false);
@@ -36,10 +38,10 @@ const Login = ({ setLogin }) => {
               "text-red-500 " + (errorMessage ? " scale-0 " : "scale-100")
             }
           >
-            ID raqamini kiriting
+            Foydalanuvchi nomini kiriting
           </p>
-        </div>
-        <div className="w-full pl-[5%]">
+        </Box>
+        <Box className="w-full pl-[5%]">
           <TextField
             type={"password"}
             id="outlined-basic"
@@ -60,16 +62,16 @@ const Login = ({ setLogin }) => {
           >
             Parol kiriting
           </p>
-        </div>
+        </Box>
         <p
           className={
             "text-center font-semibold text-xl text-red-500 " +
             (help ? "scale-0" : "scale-100")
           }
         >
-          Parol Yoki ID hato tekshirib ko'ring!
+          Parol yoki foydalanuvchi nomi hato tekshirib ko'ring!
         </p>
-        <Link to={id === "TEST" && password === "test" ? "/home" : ""}>
+        <Link to={username === "TEST" && password === "test" ? "/home" : ""}>
           <Button
             type="submit"
             variant="contained"
@@ -77,12 +79,12 @@ const Login = ({ setLogin }) => {
             size="large"
             className="w-[200px] h-[60px]"
             onClick={() => {
-              if (id === "TEST" && password === "test") {
+              if (username === "nurmuhammad" && password === "done7858") {
                 setErrorPassword(true);
                 setErrorMessage(true);
-                setLogin(true)
+                setLogin(true);
               } else {
-                if (id === "" && password === "") {
+                if (username === "" && password === "") {
                   setErrorPassword(false);
                   setErrorMessage(false);
                 } else {
@@ -95,7 +97,7 @@ const Login = ({ setLogin }) => {
           </Button>
         </Link>
       </form>
-    </div>
+    </Box>
   );
 };
 
