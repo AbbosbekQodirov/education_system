@@ -1,17 +1,35 @@
-import React, { useContext, useState } from "react";
-import { Box, Button, TextField } from "@mui/material";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import AuthContext from "../context/AuthContext";
+import axios from "axios";
 
 const Login = ({ setLogin }) => {
-  const { loginUser } = useContext(AuthContext);
-  const [errorMessage, setErrorMessage] = useState(true);
-  const [errorPassword, setErrorPassword] = useState(true);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState(true);
+  const [errorPassword, setErrorPassword] = useState(true);
   const [help, setHelp] = useState(true);
+  const [take_token, setTake_token] = useState([]);
+
+  const tokenAxios = axios.create({
+    baseURL: process.env.REACT_APP_TOKEN,
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  useEffect(() => {
+    const getToken = async (url) => {
+      const response = await tokenAxios.post(url, {
+        username: "nurmuhammad",
+        password: "done7858",
+      });
+      setTake_token(await response.data);
+    };
+    getToken("take_token/");
+  });
+  localStorage.setItem("take_token", JSON.stringify(take_token));
+  if (!take_token) return null;
   return (
-    <Box className="w-full h-screen flex justify-center items-center bg-gradient-to-br from-cyan-500 to-blue-500">
+    <div className="w-full h-screen flex justify-center items-center bg-gradient-to-br from-cyan-500 to-blue-500">
       <form
         action="/home"
         className="w-[500px] max-w-[90%] min-h-[600px] bg-white rounded-xl flex justify-center items-center flex-col gap-5"
@@ -19,13 +37,10 @@ const Login = ({ setLogin }) => {
         <h1 className="text-3xl font-semibold text-center text-blue-500">
           Web Diary
         </h1>
-        <Box className="w-full pl-[5%]">
-          <TextField
-            type={"text"}
-            id="outlined-basic"
-            label="user name"
-            className="w-[95%]"
-            variant="outlined"
+        <div className="w-full pl-[5%]">
+          <input
+            type="text"
+            className="w-[95%] p-4 text-xl rounded-lg"
             onChange={(message) => {
               setUsername(message.target.value);
               message.target.value
@@ -40,14 +55,11 @@ const Login = ({ setLogin }) => {
           >
             Foydalanuvchi nomini kiriting
           </p>
-        </Box>
-        <Box className="w-full pl-[5%]">
-          <TextField
-            type={"password"}
-            id="outlined-basic"
-            label="Parol"
-            className="w-[95%]"
-            variant="outlined"
+        </div>
+        <div className="w-full pl-[5%]">
+          <input
+            type="password"
+            className="w-[95%] p-4 text-xl rounded-lg"
             onChange={(pass) => {
               setPassword(pass.target.value);
               pass.target.value
@@ -62,7 +74,7 @@ const Login = ({ setLogin }) => {
           >
             Parol kiriting
           </p>
-        </Box>
+        </div>
         <p
           className={
             "text-center font-semibold text-xl text-red-500 " +
@@ -72,12 +84,11 @@ const Login = ({ setLogin }) => {
           Parol yoki foydalanuvchi nomi hato tekshirib ko'ring!
         </p>
         <Link to={username === "TEST" && password === "test" ? "/home" : ""}>
-          <Button
+          <input
             type="submit"
-            variant="contained"
             color="primary"
-            size="large"
-            className="w-[200px] h-[60px]"
+            className="w-[200px] h-[60px] bg-blue-500 rounded-lg text-white text-xl cursor-pointer"
+            value={"Yuborish"}
             onClick={() => {
               if (username === "nurmuhammad" && password === "done7858") {
                 setErrorPassword(true);
@@ -92,12 +103,10 @@ const Login = ({ setLogin }) => {
                 }
               }
             }}
-          >
-            Login
-          </Button>
+          />
         </Link>
       </form>
-    </Box>
+    </div>
   );
 };
 

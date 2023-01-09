@@ -1,70 +1,64 @@
-import React from "react";
-import { Box, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
-import CustomPaginationActionsTable from "../components/AttendanceChart";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import Loading from "./Loading";
 
 const Doubt = () => {
+  const [groupApi, setGroupApi] = useState([]);
+  const take_token = localStorage.getItem("take_token");
+  const accessToken = JSON.parse(take_token);
+  const [loading, setLoading] = useState(false);
+  const groupAxios = axios.create({
+    baseURL: process.env.REACT_APP_TOKEN,
+    headers: {
+      Authorization: `Bearer ${accessToken.access}`,
+    },
+  });
+  useEffect(() => {
+    const getGroup = async (url) => {
+      const response = await groupAxios.get(url);
+      setGroupApi(await response.data);
+      setLoading(true);
+    };
+    getGroup("groups/");
+  });
+  console.log(groupApi);
+  if (!groupApi) return null;
   return (
-    <Box className="flex flex-col gap-4">
-      <Box className="filter w-full min-h-[60px] my-2 flex justify-evenly items-center gap-4 flex-wrap">
-        <FormControl className="w-[150px]">
-          <InputLabel id="demo-simple-select-label">Kurslar</InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            label="Kurslar"
-          >
-            <MenuItem value={1}>Front End</MenuItem>
-            <MenuItem value={2}>Back End</MenuItem>
-            <MenuItem value={3}>Grafik Dizayn</MenuItem>
-          </Select>
-        </FormControl>
-
-        <FormControl className="w-[150px]">
-          <InputLabel id="demo-simple-select-label">Guruhlar</InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            label="Guruhlar"
-          >
-            <MenuItem value={1}>F5 Front End</MenuItem>
-            <MenuItem value={2}>F6 Front End</MenuItem>
-            <MenuItem value={3}>F7 Front End</MenuItem>
-          </Select>
-        </FormControl>
-
-        <FormControl className="w-[150px]">
-          <InputLabel id="demo-simple-select-label">Ustozlar</InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            label="Ustozlar"
-          >
-            <MenuItem value={1}>Abbosbek Teacher</MenuItem>
-            <MenuItem value={2}>Shaxzodbek Teacher</MenuItem>
-            <MenuItem value={3}>Alimardon Teacher</MenuItem>
-          </Select>
-        </FormControl>
-      </Box>
-      <Box className="courses-about w-full min-h-[60px] flex flex-wrap gap-3 justify-evenly items-center">
-        <Box className="flex flex-col">
-          <h5 className="text-md font-semibold">Guruh:</h5>
-          <p>Front End 6</p>
-        </Box>
-        <Box className="flex flex-col">
-          <h5 className="text-md font-semibold">Ustoz:</h5>
-          <p>Shaxzodbek Teacher</p>
-        </Box>
-        <Box className="flex flex-col">
-          <h5 className="text-md font-semibold">Muayyan Vaqt:</h5>
-          <p>28-kun/Payshanba/2021-yil</p>
-        </Box>
-        <Box className="flex flex-col">
-          <h5 className="text-md font-semibold">Hozrgi Oy:</h5>
-          <p>Okiyabr</p>
-        </Box>
-      </Box>
-      <CustomPaginationActionsTable />
-    </Box>
+    <div className="flex flex-col gap-4">
+      <div className="filter w-full min-h-[60px] my-2 flex justify-evenly items-center gap-4 flex-wrap">
+        {loading ? (
+          <table className="w-[90%] text-center">
+          <thead>
+            <tr className="h-[60px] bg-white">
+              <th>№</th>
+              <th>Guruh nomi</th>
+              <th>Kurslar</th>
+              <th>O'qituvchilar</th>
+              <th>Vaqti</th>
+              <th>Kunlar</th>
+            </tr>
+          </thead>
+          <tbody>
+            {groupApi.map((group) => (
+              <tr
+                key={group.id}
+                className="duration-300 h-[60px] bg-gray-300 cursor-pointer hover:bg-gray-100"
+              >
+                <td>{group.id}</td>
+                <td>{group.course.subject.subjectName}</td>
+                <td>{group.course.courseName}</td>
+                <td>{group.course.courseName}</td>
+                <td>{group.groupStatus.statusName}</td>
+                <td>
+                  {group.groupStartDate}-{group.groupEndDate}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        ) : <Loading />}
+      </div>
+    </div>
   );
 };
 

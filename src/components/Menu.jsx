@@ -1,10 +1,9 @@
-import { Box } from "@mui/material";
 import React from "react";
 import { NavLink } from "react-router-dom";
 
 const Menu = ({ Icons }) => {
   return (
-    <Box className="menu flex flex-col justify-around items-center w-[110px] min-h-[calc(100vh-100px)]shadow-2xl">
+    <div className="menu flex flex-col justify-around items-center w-[110px] min-h-[calc(100vh-100px)]shadow-2xl">
       <NavLink
         className="w-[100px] p-2 flex flex-col gap-2 items-center duration-300 rounded-lg hover:bg-gray-500 hover:text-white"
         to={"/doubt"}
@@ -54,7 +53,7 @@ const Menu = ({ Icons }) => {
         <Icons.FiSettings />
         <p>Sozlanmalar</p>
       </NavLink>
-    </Box>
+    </div>
   );
 };
 
