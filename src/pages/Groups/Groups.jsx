@@ -1,21 +1,23 @@
 import React, { useContext, useEffect, useState } from "react";
-import Loading from "./Loading";
-import { GroupAxios } from "../Api/Axios/AccessToken";
+import { Link } from "react-router-dom";
+import { GroupAxios } from "../../Api/Axios/AccessToken";
+import { LoginContext } from "../../context/LoginContext";
+import Loading from "../Loading";
+const Groups = () => {
+  const [groups, setGroups] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-const Doubt = () => {
-  const [groupApi, setGroupApi] = useState([]);
-    const [loading, setLoading] = useState(false);
-
-
+  const { locationPathname } = useContext(LoginContext);
   useEffect(() => {
     const getGroup = async (url) => {
       const response = await GroupAxios.get(url);
-      setGroupApi(await response.data);
+      setGroups(await response.data);
       setLoading(true);
     };
-    getGroup("groups/");
+    getGroup(locationPathname);
   });
-  if (!groupApi) return null;
+  console.log(groups);
+  if (!groups) return null;
   return (
     <>
       {loading ? (
@@ -27,20 +29,18 @@ const Doubt = () => {
                   <th>№</th>
                   <th>Guruh nomi</th>
                   <th>Kurslar</th>
-                  <th>O'qituvchilar</th>
                   <th>Vaqti</th>
                   <th>Kunlar</th>
                 </tr>
               </thead>
               <tbody>
-                {groupApi.map((group) => (
+                {groups.map((group) => (
                   <tr
                     key={group.id}
                     className="duration-300 h-[60px] bg-gray-300 cursor-pointer hover:bg-gray-100"
                   >
                     <td>{group.id}</td>
                     <td>{group.course.subject.subjectName}</td>
-                    <td>{group.course.courseName}</td>
                     <td>{group.course.courseName}</td>
                     <td>{group.groupStatus.statusName}</td>
                     <td>
@@ -58,5 +58,4 @@ const Doubt = () => {
     </>
   );
 };
-
-export default Doubt;
+export default Groups;

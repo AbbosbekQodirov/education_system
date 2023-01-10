@@ -1,35 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import { LoginContext } from "../context/LoginContext";
 
-const Login = ({ setLogin }) => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState(true);
-  const [errorPassword, setErrorPassword] = useState(true);
-  const [help, setHelp] = useState(true);
-  const [take_token, setTake_token] = useState([]);
+const Login = () => {
+  const {
+    username,
+    setUsername,
+    password,
+    setPassword,
+    errorMessage,
+    setErrorMessage,
+    errorPassword,
+    setErrorPassword,
+    help,
+    setHelp,
+  } = useContext(LoginContext);
 
-  const tokenAxios = axios.create({
-    baseURL: process.env.REACT_APP_TOKEN,
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  useEffect(() => {
-    const getToken = async (url) => {
-      const response = await tokenAxios.post(url, {
-        username: "nurmuhammad",
-        password: "done7858",
-      });
-      setTake_token(await response.data);
-    };
-    getToken("take_token/");
-  });
-  localStorage.setItem("take_token", JSON.stringify(take_token));
-  if (!take_token) return null;
   return (
-    <div className="w-full h-screen flex justify-center items-center bg-gradient-to-br from-cyan-500 to-blue-500">
+    <div className="w-full h-screen flex justify-center items-center bg-gradient-to-br from-cyan-500 to-blue-500 absolute top-0 left-0 z-50">
       <form
         action="/home"
         className="w-[500px] max-w-[90%] min-h-[600px] bg-white rounded-xl flex justify-center items-center flex-col gap-5"
@@ -93,7 +81,7 @@ const Login = ({ setLogin }) => {
               if (username === "nurmuhammad" && password === "done7858") {
                 setErrorPassword(true);
                 setErrorMessage(true);
-                setLogin(true);
+                localStorage.setItem("login", JSON.stringify(true));
               } else {
                 if (username === "" && password === "") {
                   setErrorPassword(false);
