@@ -1,25 +1,35 @@
-import React, { useContext } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { LoginContext } from "../context/LoginContext";
-
+import { TokenAxios } from "../Api/Axios/TakeToken";
 const Login = () => {
-  const {
-    username,
-    setUsername,
-    password,
-    setPassword,
-    errorMessage,
-    setErrorMessage,
-    errorPassword,
-    setErrorPassword,
-    help,
-    setHelp,
-  } = useContext(LoginContext);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState(true);
+  const [errorPassword, setErrorPassword] = useState(true);
+  const [help, setHelp] = useState(true);
+  const [take_token, setTake_token] = useState([]);
 
+  useEffect(() => {
+    const getToken = async (url) => {
+      try {
+        const response = await TokenAxios.post(url, {
+          username: username,
+          password: password,
+        });
+        setTake_token(await response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    getToken("take_token/");
+  }, [password, username]);
+  localStorage.setItem("take_token", JSON.stringify(take_token));
+
+  if (!take_token) return null;
   return (
     <div className="w-full h-screen flex justify-center items-center bg-gradient-to-br from-cyan-500 to-blue-500 absolute top-0 left-0 z-50">
       <form
-        action="/home"
+        action="/"
         className="w-[500px] max-w-[90%] min-h-[600px] bg-white rounded-xl flex justify-center items-center flex-col gap-5"
       >
         <h1 className="text-3xl font-semibold text-center text-blue-500">
@@ -28,7 +38,7 @@ const Login = () => {
         <div className="w-full pl-[5%]">
           <input
             type="text"
-            className="w-[95%] p-4 text-xl rounded-lg"
+            className="w-[95%] p-4 text-xl rounded-lg bg-gray-200"
             onChange={(message) => {
               setUsername(message.target.value);
               message.target.value
@@ -47,7 +57,7 @@ const Login = () => {
         <div className="w-full pl-[5%]">
           <input
             type="password"
-            className="w-[95%] p-4 text-xl rounded-lg"
+            className="w-[95%] p-4 text-xl rounded-lg bg-gray-200"
             onChange={(pass) => {
               setPassword(pass.target.value);
               pass.target.value
@@ -71,7 +81,13 @@ const Login = () => {
         >
           Parol yoki foydalanuvchi nomi hato tekshirib ko'ring!
         </p>
-        <Link to={username === "TEST" && password === "test" ? "/home" : ""}>
+        <Link
+          to={
+            username === "nurmuhammad" && password === "done7858"
+              ? "/"
+              : "/login"
+          }
+        >
           <input
             type="submit"
             color="primary"
