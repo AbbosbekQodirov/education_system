@@ -44,22 +44,22 @@ export default function AddCourse() {
               id="demo-simple-select"
               label="Mavzuni Tanlang"
             >
-              <MenuItem value={"Abdulloh"}>Dasturlash</MenuItem>
-              <MenuItem value={"Saidakbar"}>Amaliy Fanlar</MenuItem>
-              <MenuItem value={"Muhammad"}>Tabiiy Fanlar</MenuItem>
+              <MenuItem value={"Dasturlash"}>Dasturlash</MenuItem>
+              <MenuItem value={"Amaliy-Fanlar"}>Amaliy Fanlar</MenuItem>
+              <MenuItem value={"Tabiiy-Fanlar"}>Tabiiy Fanlar</MenuItem>
             </Select>
           </FormControl>
           <TextField
             id="text"
             className="w-full"
-            label="Nomi"
-            variant="Kurs Nomi"
+            label="Kurs Nomi"
+            variant="outlined"
           />
           <TextField
             id="text"
             className="w-full"
-            label="Narxi"
-            variant="Kurs Narxi"
+            label="Kurs Narxi"
+            variant="outlined"
           />
           <Button
             variant="contained"

@@ -10,10 +10,16 @@ import { GiTeacher } from "react-icons/gi";
 import { ImStatsDots } from "react-icons/im";
 import Menu from "./components/Menu";
 import Navbar from "./components/Navbar";
-import Groups from "./pages/Groups";
+import Groups from "./pages/Group Page/Groups";
 import { Attendances } from "./pages/Attendances";
 import Login from "./components/Login";
 import Home from "./pages/Home";
+import Teachers from "./pages/Teacher Page/Teachers";
+import Group from "./pages/Group Page/Group";
+import Teacher from "./pages/Teacher Page/Teacher";
+import Students from "./pages/Student Page/Students";
+import Student from "./pages/Student Page/Student";
+import Dashboard from "./pages/Dashboard/Dashboard";
 function App() {
   const navigate = useNavigate();
   setTimeout(() => {
@@ -47,6 +53,12 @@ function App() {
             <Route index path="/login" element={<Login />} />
             <Route path="/attendances/:id" element={<Attendances />} />
             <Route path="/groups" element={<Groups />} />
+            <Route path="/groups/:id" element={<Group />} />
+            <Route path="/teachers" element={<Teachers />} />
+            <Route path="/teachers/:id" element={<Teacher />} />
+            <Route path="/students" element={<Students />} />
+            <Route path="/students/:id" element={<Student />} />
+            <Route path="/reports" element={<Dashboard />} />
           </Routes>
         </header>
       </section>

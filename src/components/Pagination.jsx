@@ -1,6 +1,10 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-export default function Pagination({ totalAttendences, attendencesPerPage, paginate }) {
+export default function Pagination({
+  totalAttendences,
+  attendencesPerPage,
+  paginate,
+}) {
   const pageNumbers = [];
   for (let i = 1; i <= Math.ceil(totalAttendences / attendencesPerPage); i++) {
     pageNumbers.push(i);
